@@ -11,9 +11,11 @@ class CountryController extends Controller
 {
     public function index(CountryFilter $filters)
     {
-        return CountryResource::collection(
-            Country::filter($filters)->isAvailable()->paginate()
-        );
+        $countries = Country::available()->filter($filters)->get();
+
+        return response([
+            'countries' => CountryResource::collection($countries)
+        ]);
     }
 
 

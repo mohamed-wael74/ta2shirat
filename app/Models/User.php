@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Traits\Filterable;
 use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Builder;
@@ -30,9 +29,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'country_id',
-        'firstname',
-        'middlename',
-        'lastname',
+        'first_name',
+        'middle_name',
+        'last_name',
         'username',
         'birthdate',
         'email',

@@ -26,9 +26,9 @@ class UserUpdateRequest extends FormRequest
 
         return [
             'country_id' => ['sometimes', 'integer', Rule::exists('countries', 'id')->where('is_available', true)],
-            'firstname' => ['sometimes', 'string', 'min:2', 'max:20'],
-            'middlename' => ['sometimes', 'string', 'min:2', 'max:20'],
-            'lastname' => ['sometimes', 'string', 'min:2', 'max:20'],
+            'first_name' => ['sometimes', 'string', 'min:2', 'max:20'],
+            'middle_name' => ['sometimes', 'string', 'min:2', 'max:20'],
+            'last_name' => ['sometimes', 'string', 'min:2', 'max:20'],
             'email' => [
                 'sometimes',
                 'email',

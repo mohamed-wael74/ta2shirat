@@ -18,8 +18,8 @@ class SignupRequest extends FormRequest
     {
         return [
             'country_id' => 'required|exists:countries,id',
-            'firstname' => 'required|string|min:2|max:20',
-            'lastname' => 'required|string|min:2|max:20',
+            'first_name' => 'required|string|min:2|max:20',
+            'last_name' => 'required|string|min:2|max:20',
             'email' => 'required|email|unique:users,email',
             'password' => [
                 'required',
@@ -38,8 +38,8 @@ class SignupRequest extends FormRequest
             $user = User::create([
                 'country_id' => $this->country_id,
                 'username' => User::generateUsername($this->email),
-                'firstname' => $this->firstname,
-                'lastname' => $this->lastname,
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
                 'email' => $this->email,
                 'password' => bcrypt($this->password),
             ]);
