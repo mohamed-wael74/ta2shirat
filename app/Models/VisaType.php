@@ -4,36 +4,23 @@ namespace App\Models;
 
 use App\Traits\Filterable;
 use App\Traits\Searchable;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Traits\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class VisaType extends Model
 {
-    use HasFactory, Filterable, Searchable;
+    use HasFactory, Filterable, Searchable, Translatable;
 
     protected $fillable = [
 
     ];
 
-    public function translations(): HasMany
-    {
-        return $this->hasMany(VisaTypeTranslation::class);
-    }
+    protected array $translatableFields = [
+        'name'
+    ];
 
-    public function currentTranslation()
-    {
-        return $this->translations->where('locale', app()->getLocale())->first();
-    }
-
-    protected function name(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $this->currentTranslation()->name ??
-                $this->translations->where('locale', config('app.fallback_locale'))->first()->name,
-        );
-    }
+    // Other Methods
 
     public function remove(): bool
     {
