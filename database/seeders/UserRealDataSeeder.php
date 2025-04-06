@@ -18,8 +18,8 @@ class UserRealDataSeeder extends Seeder
     {
         $user = User::factory()->verified()->create([
             'country_id' => 1,
-            'firstname' => 'Admin',
-            'lastname' => 'Admin',
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
             'username' => 'admin',
             'email' => 'admin@example.com',
         ]);

@@ -51,9 +51,9 @@ class UserFilter extends QueryFilter
     public function search($keyword = ''): Builder
     {
         return $this->builder->search([
-            'firstname',
-            'middlename',
-            'lastname',
+            'first_name',
+            'middle_name',
+            'last_name',
             'username',
             'email'
         ], $keyword);

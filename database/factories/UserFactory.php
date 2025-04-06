@@ -21,8 +21,8 @@ class UserFactory extends Factory
     {
         return [
             'country_id' => Country::all()->random()->id,
-            'firstname' => fake()->firstName(),
-            'lastname' => fake()->lastName(),
+            'first_name' => fake()->first_name(),
+            'last_name' => fake()->last_name(),
             'username' => fake()->userName(),
             'email' => fake()->unique()->safeEmail(),
             'birthdate' => fake()->date(),
