@@ -18,7 +18,8 @@ class RoleController extends Controller
 
     public function index()
     {
-        return RoleSimpleResource::collection(Role::paginate());
+        $roles = Role::paginate();
+        return RoleSimpleResource::collection($roles);
     }
 
     public function store(RoleStoreRequest $request)
@@ -26,15 +27,15 @@ class RoleController extends Controller
         $role = $request->storeRole();
 
         return response([
+            'message' => __('roles.store'),
             'role' => RoleResource::make($role),
-            'message' => __('roles.store')
         ]);
     }
 
     public function show(Role $role)
     {
         return response([
-            'role' => RoleResource::make($role)
+            'role' => new RoleResource($role)
         ]);
     }
 
@@ -43,14 +44,14 @@ class RoleController extends Controller
         $request->updateRole();
 
         return response([
-            'role' => RoleResource::make($role),
-            'message' => __('roles.update')
+            'message' => __('roles.update'),
+            'role' => new RoleResource($role),
         ]);
     }
 
     public function destroy(Role $role)
     {
-        if (! $role->remove()) {
+        if (!$role->remove()) {
             return response([
                 'message' => __('roles.cant_destroy_superadmin')
             ], 403);

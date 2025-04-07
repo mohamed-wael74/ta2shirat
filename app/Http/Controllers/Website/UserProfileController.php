@@ -12,7 +12,7 @@ class UserProfileController extends Controller
     public function index()
     {
         return response([
-            'user' => UserResource::make(Auth::user())
+            'user' => new UserResource(Auth::user()),
         ]);
     }
 
@@ -21,8 +21,8 @@ class UserProfileController extends Controller
         $user = $request->updateUser();
 
         return response([
-            'user' => UserResource::make($user),
-            'message' => __('users.update')
+            'message' => __('users.update'),
+            'user' => new UserResource($user),
         ]);
     }
 

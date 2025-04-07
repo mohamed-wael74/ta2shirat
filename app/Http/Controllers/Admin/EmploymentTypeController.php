@@ -18,7 +18,8 @@ class EmploymentTypeController extends Controller
 
     public function index()
     {
-        return EmploymentTypeResource::collection(EmploymentType::with('translations')->paginate());
+        $employmentTypes = EmploymentType::with('translations')->paginate();
+        return EmploymentTypeResource::collection($employmentTypes);
     }
 
     public function show(EmploymentType $employmentType)
@@ -30,24 +31,28 @@ class EmploymentTypeController extends Controller
 
     public function store(EmploymentTypeStoreRequest $request)
     {
+        $employmentType = $request->storeEmploymentType();
+
         return response([
-            'employment_type' => new EmploymentTypeResource($request->storeEmploymentType()),
-            'message' => __('employment_types.store')
+            'message' => __('employment_types.store'),
+            'employment_type' => new EmploymentTypeResource($employmentType),
         ]);
     }
 
     public function update(EmploymentTypeUpdateRequest $request, EmploymentType $employmentType)
     {
         $request->updateEmploymentType();
+
         return response([
+            'message' => __('employment_types.update'),
             'employment_type' => new EmploymentTypeResource($employmentType),
-            'message' => __('employment_types.update')
         ]);
     }
 
     public function destroy(EmploymentType $employmentType)
     {
         $employmentType->remove();
+
         return response([
             'message' => __('employment_types.destroy')
         ]);

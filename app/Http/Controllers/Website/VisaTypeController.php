@@ -11,15 +11,14 @@ class VisaTypeController extends Controller
 {
     public function index(VisaTypeFilter $filters)
     {
-        return VisaTypeResource::collection(
-            VisaType::filter($filters)->paginate()
-        );
+        $visaTypes = VisaType::filter($filters)->paginate();
+        return VisaTypeResource::collection($visaTypes);
     }
 
     public function show(VisaType $visaType)
     {
         return response([
-            'visa_type' => VisaTypeResource::make($visaType)
+            'visa_type' => new VisaTypeResource($visaType)
         ]);
     }
 }

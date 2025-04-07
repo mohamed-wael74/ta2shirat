@@ -49,7 +49,9 @@ class PermissionGroupUpdateRequest extends FormRequest
     public function updateTranslation()
     {
         $this->permission_group->translations()->updateOrCreate(
-            ['locale' => $this->validated('locale')],
+            [
+                'locale' => $this->validated('locale')
+            ],
             [
                 'name' => $this->exists('name') ? $this->name : $this->permission_group->name,
                 'description' => $this->exists('description') ? $this->description : $this->permission_group->description,

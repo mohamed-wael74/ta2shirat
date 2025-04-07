@@ -38,6 +38,7 @@ class EmploymentTypeStoreRequest extends FormRequest
                 'name' => $this->name,
                 'locale' => config('app.fallback_locale')
             ]);
+
             return $employmentType->refresh();
         });
     }

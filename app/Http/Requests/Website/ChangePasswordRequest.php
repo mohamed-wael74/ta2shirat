@@ -53,6 +53,7 @@ class ChangePasswordRequest extends FormRequest
         $this->user->update([
             'password' => bcrypt($this->new_password)
         ]);
+        
         return true;
     }
 }

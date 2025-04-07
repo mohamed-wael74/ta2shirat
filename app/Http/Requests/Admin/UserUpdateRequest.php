@@ -14,7 +14,7 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'blocked' => ['required', 'boolean'],
+            'blocked' => 'required|boolean',
         ];
     }
 

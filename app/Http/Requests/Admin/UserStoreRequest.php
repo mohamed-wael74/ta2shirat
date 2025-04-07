@@ -19,26 +19,31 @@ class UserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'country_id' => ['required', 'integer', Rule::exists('countries', 'id')->where('is_available', true)],
-            'first_name' => ['required', 'string', 'min:2', 'max:20'],
-            'middle_name' => ['sometimes', 'string', 'min:2', 'max:20'],
-            'last_name' => ['required', 'string', 'min:2', 'max:20'],
+            'country_id' => 'required|integer|exists:countries,id,is_available,1',
+            'first_name' => 'required|string|min:2|max:20',
+            'middle_name' => 'sometimes|string|min:2|max:20',
+            'last_name' => 'required|string|min:2|max:20',
             'email' => [
                 'required',
                 'email',
                 'max:50',
                 Rule::unique('users')
                     ->whereNull('deleted_at')
-                    ->whereNotNull('email_verified_at')
+                    ->whereNotNull('email_verified_at'),
             ],
-            'password' => ['required', 'string', 'confirmed', Password::default()],
-            'birthdate' => ['sometimes', 'date'],
-            'blocked' => ['sometimes', 'boolean'],
-            'phone' => ['required', 'array', 'max:3'],
-            'phone.country_code' => ['required', 'string', 'exists:countries,code'],
-            'phone.phone' => ['required', 'numeric', 'digits_between:9,15'],
-            'phone.type' => ['sometimes', 'string', 'max:10'],
-            'image' => ['sometimes', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
+            'password' => [
+                'required',
+                'string',
+                'confirmed',
+                Password::default()
+            ],
+            'birthdate' => 'sometimes|date',
+            'blocked' => 'sometimes|boolean',
+            'phone' => 'required|array|max:3',
+            'phone.country_code' => 'required|string|exists:countries,code',
+            'phone.phone' => 'required|numeric|digits_between:9,15',
+            'phone.type' => 'sometimes|string|max:10',
+            'image' => 'sometimes|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }
 

@@ -18,41 +18,40 @@ class VisaTypeController extends Controller
 
     public function index(VisaTypeFilter $filters)
     {
-        return VisaTypeResource::collection(
-            VisaType::filter($filters)->paginate()
-        );
+        $visaTypes = VisaType::filter($filters)->paginate();
+        return VisaTypeResource::collection($visaTypes);
     }
 
     public function store(VisaTypeStoreRequest $request)
     {
-        $visa_type = $request->storeVisaType();
+        $visaType = $request->storeVisaType();
 
         return response([
-            'visa_type' => VisaTypeResource::make($visa_type),
-            'message' => __('visa_types.store')
+            'message' => __('visa_types.store'),
+            'visa_type' => new VisaTypeResource($visaType),
         ]);
     }
 
-    public function show(VisaType $visa_type)
+    public function show(VisaType $visaType)
     {
         return response([
-            'visa_type' => VisaTypeResource::make($visa_type)
+            'visa_type' => new VisaTypeResource($visaType)
         ]);
     }
 
-    public function update(VisaTypeUpdateRequest $request, VisaType $visa_type)
+    public function update(VisaTypeUpdateRequest $request, VisaType $visaType)
     {
         $request->updateVisaType();
 
         return response([
-            'visa_type' => VisaTypeResource::make($visa_type),
-            'message' => __('visa_types.update')
+            'message' => __('visa_types.update'),
+            'visa_type' => new VisaTypeResource($visaType),
         ]);
     }
 
-    public function destroy(VisaType $visa_type)
+    public function destroy(VisaType $visaType)
     {
-        if (! $visa_type->remove()) {
+        if (!$visaType->remove()) {
             return response([
                 'message' => __('visa_types.cant_destroy')
             ]);

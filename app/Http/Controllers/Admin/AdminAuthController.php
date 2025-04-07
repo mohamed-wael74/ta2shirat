@@ -12,6 +12,7 @@ class AdminAuthController extends Controller
     public function signin(SigninRequest $request)
     {
         $response = $request->signin();
+
         return response([
             'access_token' => $response['access_token'],
             'user' => new UserResource($response['user']),
@@ -23,6 +24,7 @@ class AdminAuthController extends Controller
     {
         $user = Auth::user();
         $user->token()->revoke();
+        
         return response([
             'message' => __('auth.success_logout')
         ]);
