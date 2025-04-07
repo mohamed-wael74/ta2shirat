@@ -7,6 +7,7 @@ return [
     'cant_destroy' => 'لا يمكنك حذف هذا الحساب',
     'cant_block_yourself' => 'لا يمكنك حظر نفسك.',
     'cant_block_superadmin' => 'لا يمكنك حظر المسؤول الرئيسي.',
+    
     'roles' => [
         'update' => 'تم تحديث دور المستخم بنجاح.',
         'destroy' => 'تم حذف دور المسخدم بنجاح.',

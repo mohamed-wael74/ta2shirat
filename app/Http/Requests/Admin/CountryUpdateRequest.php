@@ -36,6 +36,7 @@ class CountryUpdateRequest extends FormRequest
                 'name' => $this->exists('name') ? $this->name : $this->country->name
             ]
         );
+
         return $this->country->refresh();
     }
 }

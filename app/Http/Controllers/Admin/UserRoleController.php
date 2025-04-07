@@ -33,13 +33,13 @@ class UserRoleController extends Controller
 
         if ($user->isSuperAdmin() && $role->isMainRole()) {
             return response([
-                'message' => __('user.roles.cant_destroy_superadmin')
+                'message' => __('users.roles.cant_destroy_superadmin')
             ], 403);
         }
 
         $user->removeRoleAndPermissions($role);
         return response([
-            'message' => __('user.roles.destroy'),
+            'message' => __('users.roles.destroy'),
             'User' => new UserResource($user),
         ]);
     }
