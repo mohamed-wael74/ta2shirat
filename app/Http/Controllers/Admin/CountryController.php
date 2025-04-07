@@ -17,15 +17,14 @@ class CountryController extends Controller
 
     public function index(CountryFilter $filters)
     {
-        return CountryResource::collection(
-            Country::filter($filters)->paginate()
-        );
+        $countries = Country::with('translations')->filter($filters)->paginate();
+        return CountryResource::collection($countries);
     }
 
     public function show(Country $country)
     {
         return response([
-            'country' => CountryResource::make($country)
+            'country' => new CountryResource($country)
         ]);
     }
 
@@ -34,8 +33,8 @@ class CountryController extends Controller
         $request->updateCountry();
 
         return response([
-            'country' => CountryResource::make($country),
-            'message' => __('countries.update')
+            'message' => __('countries.update'),
+            'country' => new CountryResource($country),
         ]);
     }
 }

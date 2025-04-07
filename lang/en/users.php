@@ -7,6 +7,7 @@ return [
     'cant_destroy' => 'You cannot delete this account.',
     'cant_block_yourself' => 'You cannot block yourself.',
     'cant_block_superadmin' => 'You cannot block the main admin.',
+    
     'roles' => [
         'update' => 'User role updated successfully.',
         'destroy' => 'User role deleted successfully.',

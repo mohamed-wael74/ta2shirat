@@ -28,7 +28,7 @@ class RoleController extends Controller
 
         return response([
             'message' => __('roles.store'),
-            'role' => RoleResource::make($role),
+            'role' => new RoleResource($role),
         ]);
     }
 

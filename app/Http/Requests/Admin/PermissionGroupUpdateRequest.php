@@ -37,7 +37,7 @@ class PermissionGroupUpdateRequest extends FormRequest
 
     public function updatePermissionGroup()
     {
-        $this->updateTranslation();
+        $this->updatePermissionGroupTranslation();
 
         PermissionGroupPermission::whereIn('permission_id', $this->permissions)
             ->where('permission_group_id', '!=', $this->permission_group->id)
@@ -46,7 +46,7 @@ class PermissionGroupUpdateRequest extends FormRequest
         return $this->permission_group->refresh();
     }
 
-    public function updateTranslation()
+    public function updatePermissionGroupTranslation()
     {
         $this->permission_group->translations()->updateOrCreate(
             [

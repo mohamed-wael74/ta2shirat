@@ -16,14 +16,14 @@ class UserResource extends JsonResource
             'first_name' => $this->first_name,
             'middle_name' => $this->middle_name,
             'last_name' => $this->last_name,
-            'phone' => PhoneResource::make($this->phone),
             'email' => $this->email,
-            'country' => CountryResource::make($this->country),
             'birthdate' => $this->birthdate,
             'image' => MediaResource::make($this->main_medium),
             'email_verified' => $this->email_verified_at,
             'phone_verified' => $this->phone_verified_at,
             'blocked' => $this->is_blocked,
+            'phone' => PhoneResource::make($this->phone),
+            'country' => CountryResource::make($this->country),
             'role' => RoleSimpleResource::make($this->role),
         ];
     }
