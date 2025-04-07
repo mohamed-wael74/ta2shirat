@@ -42,6 +42,7 @@ class VerifyEmailRequest extends FormRequest
             $this->sendMail($user);
             $user->email_verified_at = now();
             $user->save();
+            
             return true;
         });
     }

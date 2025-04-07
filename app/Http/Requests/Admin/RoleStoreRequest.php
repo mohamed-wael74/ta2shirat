@@ -16,10 +16,10 @@ class RoleStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'min:2', 'max:50', 'unique:role_translations,name'],
-            'description' => ['sometimes', 'string', 'min:2', 'max:255'],
-            'permissions' => ['required', 'array', 'min:1', 'distinct'],
-            'permissions.*' => ['required', 'integer', 'exists:permissions,id']
+            'name' => 'required|string|min:2|max:50|unique:role_translations,name',
+            'description' => 'sometimes|string|min:2|max:255',
+            'permissions' => 'required|array|min:1|distinct',
+            'permissions.*' => 'required|integer|exists:permissions,id',
         ];
     }
 

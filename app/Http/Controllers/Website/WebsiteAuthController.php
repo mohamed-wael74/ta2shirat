@@ -15,26 +15,29 @@ class WebsiteAuthController extends Controller
     public function signup(SignupRequest $request)
     {
         $response = $request->register();
+
         return response([
+            'message' => __('auth.success_register'),
             'access_token' => $response['access_token'],
             'user' => new UserResource($response['user']),
-            'message' => __('auth.success_register')
         ]);
     }
 
     public function signin(SigninRequest $request)
     {
         $response = $request->signin();
+
         return response([
+            'message' => __('auth.success_login'),
             'access_token' => $response['access_token'],
             'user' => new UserResource($response['user']),
-            'message' => __('auth.success_login')
         ]);
     }
 
     public function verifyEmail(VerifyEmailRequest $request)
     {
         $request->verifyEmail();
+
         return response([
             'message' => __('auth.success_verify')
         ]);
@@ -43,6 +46,7 @@ class WebsiteAuthController extends Controller
     public function changePassword(ChangePasswordRequest $request)
     {
         $request->changePassword();
+
         return response([
             'message' => __('passwords.reset')
         ]);
@@ -52,6 +56,7 @@ class WebsiteAuthController extends Controller
     {
         $user = Auth::user();
         $user->token()->revoke();
+
         return response([
             'message' => __('auth.success_logout')
         ]);

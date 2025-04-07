@@ -45,6 +45,7 @@ class SignupRequest extends FormRequest
             ]);
             $user->addPhone($this->phone);
             $accessToken = $user->createToken('Register Token');
+            
             return [
                 'user' => $user,
                 'access_token' => $accessToken

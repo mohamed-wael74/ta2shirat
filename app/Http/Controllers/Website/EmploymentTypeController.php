@@ -10,7 +10,8 @@ class EmploymentTypeController extends Controller
 {
     public function index()
     {
-        return EmploymentTypeResource::collection(EmploymentType::with('translations')->paginate());
+        $employmentTypes = EmploymentType::with('translations')->get();
+        return EmploymentTypeResource::collection($employmentTypes);
     }
 
     public function show(EmploymentType $employmentType)

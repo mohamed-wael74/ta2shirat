@@ -19,7 +19,8 @@ class PermissionGroupController extends Controller
 
     public function index()
     {
-        return PermissionGroupSimpleResource::collection(PermissionGroup::paginate());
+        $permissionGroups = PermissionGroup::with('permissions')->paginate();
+        return PermissionGroupSimpleResource::collection($permissionGroups);
     }
 
     public function show(PermissionGroup $permissionGroup)
@@ -31,18 +32,21 @@ class PermissionGroupController extends Controller
 
     public function store(PermissionGroupStoreRequest $request)
     {
+        $permissionGroup = $request->storePermissionGroup();
+        
         return response([
-            'permission_group' => new PermissionGroupResource($request->storePermissionGroup()),
-            'message' => __('permission_groups.store')
+            'message' => __('permission_groups.store'),
+            'permission_group' => new PermissionGroupResource($permissionGroup),
         ]);
     }
 
     public function update(PermissionGroupUpdateRequest $request, PermissionGroup $permissionGroup)
     {
         $request->updatePermissionGroup();
+
         return response([
+            'message' => __('permission_groups.update'),
             'permission_group' => new PermissionGroupResource($permissionGroup),
-            'message' => __('permission_groups.update')
         ]);
     }
 

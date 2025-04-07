@@ -34,8 +34,12 @@ class EmploymentTypeUpdateRequest extends FormRequest
     public function updateEmploymentType()
     {
         $this->employment_type->translations()->updateOrCreate(
-            ['locale' => $this->validated('locale')],
-            ['name' => $this->exists('name') ? $this->name : $this->employment_type->name]
+            [
+                'locale' => $this->input('locale')
+            ],
+            [
+                'name' => $this->exists('name') ? $this->name : $this->employment_type->name
+            ]
         );
         return $this->employment_type->refresh();
     }

@@ -51,6 +51,7 @@ class SigninRequest extends FormRequest
     public function signin()
     {
         $accessToken = $this->user->createToken('User Login Token');
+        
         return [
             'user' => $this->user,
             'access_token' => $accessToken

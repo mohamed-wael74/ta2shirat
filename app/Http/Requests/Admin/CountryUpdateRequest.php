@@ -16,9 +16,9 @@ class CountryUpdateRequest extends FormRequest
         $supportedLocales = implode(',', array_keys(config('localization.supportedLocales')));
 
         return [
-            'locale' => ['required', 'string', 'in:' . $supportedLocales],
-            'name' => ['sometimes', 'string', 'max:50'],
-            'available' => ['sometimes', 'boolean']
+            'locale' => 'required|string|in:' . $supportedLocales,
+            'name' => 'sometimes|string|max:50',
+            'available' => 'sometimes|boolean',
         ];
     }
 
@@ -29,8 +29,12 @@ class CountryUpdateRequest extends FormRequest
         ]);
 
         $this->country->translations()->updateOrCreate(
-            ['locale' => $this->validated('locale')],
-            ['name' => $this->exists('name') ? $this->name : $this->country->name]
+            [
+                'locale' => $this->input('locale')
+            ],
+            [
+                'name' => $this->exists('name') ? $this->name : $this->country->name
+            ]
         );
         return $this->country->refresh();
     }

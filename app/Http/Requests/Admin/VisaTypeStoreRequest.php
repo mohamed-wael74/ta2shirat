@@ -17,21 +17,27 @@ class VisaTypeStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'min:2', 'max:50', Rule::unique('visa_type_translations', 'name')],
+            'name' => [
+                'required',
+                'string',
+                'min:2',
+                'max:50',
+                Rule::unique('visa_type_translations', 'name')
+            ],
         ];
     }
 
     public function storeVisaType(): VisaType
     {
         return DB::transaction(function () {
-            $visa_type = VisaType::create();
+            $visaType = VisaType::create();
 
-            $visa_type->translations()->create([
+            $visaType->translations()->create([
                 'locale' => config('app.fallback_locale'),
                 'name' => $this->name
             ]);
 
-            return $visa_type->refresh();
+            return $visaType->refresh();
         });
     }
 }

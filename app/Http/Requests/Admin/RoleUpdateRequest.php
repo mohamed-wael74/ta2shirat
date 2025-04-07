@@ -17,11 +17,11 @@ class RoleUpdateRequest extends FormRequest
         $supportedLocales = implode(',', array_keys(config('localization.supportedLocales')));
 
         return [
-            'locale' => ['required', 'string', 'in:' . $supportedLocales],
-            'name' => ['sometimes', 'string', 'min:2', 'max:50', 'unique:role_translations,name,' . $this->role->id . ',role_id'],
-            'description' => ['sometimes', 'string', 'min:2', 'max:255'],
-            'permissions' => ['sometimes', 'array', 'min:1', 'distinct'],
-            'permissions.*' => ['required_with:permissions', 'integer', 'exists:permissions,id']
+            'locale' => 'required|string|in:' . $supportedLocales,
+            'name' => 'sometimes|string|min:2|max:50|unique:role_translations,name,' . $this->role->id . ',role_id',
+            'description' => 'sometimes|string|min:2|max:255',
+            'permissions' => 'sometimes|array|min:1|distinct',
+            'permissions.*' => 'required_with:permissions|integer|exists:permissions,id',
         ];
     }
 
@@ -70,6 +70,6 @@ class RoleUpdateRequest extends FormRequest
     protected function inputHasAlteredPermissions(): bool
     {
         return !empty(array_diff($this->permissions, $this->role->permissions->pluck('id')->toArray())) ||
-        !empty(array_diff($this->role->permissions->pluck('id')->toArray(), $this->permissions));
+            !empty(array_diff($this->role->permissions->pluck('id')->toArray(), $this->permissions));
     }
 }

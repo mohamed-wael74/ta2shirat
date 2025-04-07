@@ -22,8 +22,8 @@ class UserRoleController extends Controller
         }
 
         return response([
-            'User' => UserResource::make($user),
-            'message' => __('users.roles.update')
+            'message' => __('users.roles.update'),
+            'User' => new UserResource($user),
         ]);
     }
 
@@ -39,8 +39,8 @@ class UserRoleController extends Controller
 
         $user->removeRoleAndPermissions($role);
         return response([
-            'User' => UserResource::make($user),
-            'message' => __('user.roles.destroy')
+            'message' => __('user.roles.destroy'),
+            'User' => new UserResource($user),
         ]);
     }
 }

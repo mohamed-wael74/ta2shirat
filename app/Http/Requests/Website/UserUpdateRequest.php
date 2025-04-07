@@ -25,10 +25,10 @@ class UserUpdateRequest extends FormRequest
         $this->user = Auth::user();
 
         return [
-            'country_id' => ['sometimes', 'integer', Rule::exists('countries', 'id')->where('is_available', true)],
-            'first_name' => ['sometimes', 'string', 'min:2', 'max:20'],
-            'middle_name' => ['sometimes', 'string', 'min:2', 'max:20'],
-            'last_name' => ['sometimes', 'string', 'min:2', 'max:20'],
+            'country_id' => 'sometimes|integer|exists:countries,id,is_available,1',
+            'first_name' => 'sometimes|string|min:2|max:20',
+            'middle_name' => 'sometimes|string|min:2|max:20',
+            'last_name' => 'sometimes|string|min:2|max:20',
             'email' => [
                 'sometimes',
                 'email',
@@ -36,14 +36,14 @@ class UserUpdateRequest extends FormRequest
                 Rule::unique('users')
                     ->ignore($this->user->id)
                     ->whereNull('deleted_at')
-                    ->whereNotNull('email_verified_at')
+                    ->whereNotNull('email_verified_at'),
             ],
-            'birthdate' => ['sometimes', 'date'],
-            'phone' => ['sometimes', 'array', 'max:3'],
-            'phone.country_code' => ['sometimes', 'string', 'exists:countries,code'],
-            'phone.phone' => ['sometimes', 'numeric', 'digits_between:9,15'],
-            'phone.type' => ['sometimes', 'string', 'max:10'],
-            'image' => ['sometimes', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
+            'birthdate' => 'sometimes|date',
+            'phone' => 'sometimes|array|max:3',
+            'phone.country_code' => 'sometimes|string|exists:countries,code',
+            'phone.phone' => 'sometimes|numeric|digits_between:9,15',
+            'phone.type' => 'sometimes|string|max:10',
+            'image' => 'sometimes|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }
 
@@ -66,8 +66,10 @@ class UserUpdateRequest extends FormRequest
 
     protected function updatePhoneData(array $phone): void
     {
-        if ($this->exists('phone.phone') && $phone['phone'] !== $this->user->phone->phone ||
-            $phone['country_code'] !== $this->user->country_id) {
+        if (
+            $this->exists('phone.phone') && $phone['phone'] !== $this->user->phone->phone ||
+            $phone['country_code'] !== $this->user->country_id
+        ) {
             $this->user->update(['phone_verified_at' => null]);
         }
 

@@ -36,6 +36,7 @@ class PermissionGroupStoreRequest extends FormRequest
             ]);
             PermissionGroupPermission::whereIn('permission_id', $this->permissions)->delete();
             $permissionGroup->permissions()->sync($this->permissions);
+
             return $permissionGroup->refresh();
         });
     }
