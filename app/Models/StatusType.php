@@ -14,7 +14,6 @@ class StatusType extends Model
     protected $fillable = [
         'type',
         'color',
-        'icon',
     ];
 
     protected array $translatableFields = [
@@ -29,13 +28,13 @@ class StatusType extends Model
     }
 
     ## Other Methods
-    
+
     public function nextAllowedStatusesNamesMap(): array
     {
         $statusMap = [
             'pending' => ['canceled', 'in_review'],
             'in_review' => ['canceled', 'rejected', 'accepted'],
-            'accepted' => ['sold', 'canceled'],
+            'accepted' => ['canceled', 'sold'],
         ];
 
         return $statusMap[$this->type] ?? [];

@@ -19,7 +19,7 @@ class SellingVisa extends Model
         'employment_type_id',
         'provider_name',
         'contact_email',
-        'required_notifications',
+        'required_qualifications',
         'message',
         'is_done',
     ];
