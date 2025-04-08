@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\DealWithStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SellingVisa extends Model
 {
-    use HasFactory;
+    use HasFactory, DealWithStatus;
 
     protected $fillable = [
         'user_id',
@@ -52,27 +53,5 @@ class SellingVisa extends Model
     public function employmentType(): BelongsTo
     {
         return $this->belongsTo(EmploymentType::class);
-    }
-
-    public function statuses()
-    {
-        return $this->morphMany(Status::class, 'statusable')->orderBy('active_date_at', 'asc');
-    }
-
-    public function currentStatus()
-    {
-        return $this->statuses()
-            ->whereNotNull('active_date_at')
-            ->orderBy('active_date_at', 'desc')
-            ->first();
-    }
-
-    ## Other Methods
-    
-    public function activateStatus(int $statusTypeId): void
-    {
-        $this->statuses()->where('status_type_id', $statusTypeId)->update([
-            'active_date_at_at' => now()
-        ]);
     }
 }
