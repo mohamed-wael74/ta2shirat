@@ -20,6 +20,13 @@ class EmploymentType extends Model
 
     // Other Methods
 
+    ## Relations
+
+    public function sellingVisas()
+    {
+        return $this->hasMany(SellingVisa::class);
+    }
+
     public function remove()
     {
         $this->translations()->delete();

@@ -20,6 +20,13 @@ class VisaType extends Model
         'name'
     ];
 
+    ## Relations
+
+    public function sellingVisas()
+    {
+        return $this->hasMany(SellingVisa::class);
+    }
+
     // Other Methods
 
     public function remove(): bool

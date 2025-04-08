@@ -110,6 +110,11 @@ class User extends Authenticatable
         return $this->hasOne(EmailToken::class);
     }
 
+    public function sellingVisas()
+    {
+        return $this->hasMany(SellingVisa::class);
+    }
+
     public function isSuperAdmin(): bool
     {
         return $this->id === 1;
