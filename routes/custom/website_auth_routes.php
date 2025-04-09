@@ -9,10 +9,14 @@ Route::group([
         'auth:api'
     ]
 ], function () {
-    Route::post('change-password', [WebsiteAuthController::class, 'changePassword']);
-    Route::post('verify-email', [WebsiteAuthController::class, 'verifyEmail']);
-    Route::post('signout', [WebsiteAuthController::class, 'signout']);
+    Route::post('change-password', [WebsiteAuthController::class, 'changePassword'])->name('change-password');
+    Route::post('verify-email', [WebsiteAuthController::class, 'verifyEmail'])->name('verify-email');
+    Route::post('signout', [WebsiteAuthController::class, 'signout'])->name('signout');
 });
 
-Route::post('signup', [WebsiteAuthController::class, 'signup']);
-Route::post('signin', [WebsiteAuthController::class, 'signin']);
+Route::group([
+    'as' => 'website.',
+], function () {
+    Route::post('signup', [WebsiteAuthController::class, 'signup'])->name('signup');
+    Route::post('signin', [WebsiteAuthController::class, 'signin'])->name('signin');
+});
