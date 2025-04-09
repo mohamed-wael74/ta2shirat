@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Website;
 
+use App\Filters\Website\SellingVisaFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Website\SellingVisaStoreRequest;
 use App\Http\Requests\Website\SellingVisaUpdateRequest;
@@ -12,9 +13,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SellingVisaController extends Controller
 {
-    public function index()
+    public function index(SellingVisaFilter $filters)
     {
         $sellingVisas = auth()->user()->sellingVisas()
+            ->filter($filters)
             ->with([
                 'nationality',
                 'destination',
