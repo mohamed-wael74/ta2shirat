@@ -27,14 +27,14 @@ class SellingVisaStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'nationality_id' => 'required|integer|exists:countries,id',
-            'destination_id' => 'required|integer|exists:countries,id',
-            'visa_type_id' => 'required|integer|exists:visa_types,id',
-            'employment_type_id' => 'required|integer|exists:employment_types,id',
-            'provider_name' => 'required|string|max:255',
-            'contact_email' => 'required|email|max:255',
-            'required_qualifications' => 'sometimes|string',
-            'message' => 'nullable|string',
+            'nationality' => 'required|integer|exists:countries,id',
+            'destination' => 'required|integer|exists:countries,id',
+            'visa_type' => 'required|integer|exists:visa_types,id',
+            'employment_type' => 'required|integer|exists:employment_types,id',
+            'provider_name' => 'required|string|min:3|max:50',
+            'contact_email' => 'required|string|email|max:60',
+            'required_qualifications' => 'sometimes|string|min:3|max:255',
+            'message' => 'nullable|string|min:3|max:255',
         ];
     }
 
@@ -43,10 +43,10 @@ class SellingVisaStoreRequest extends FormRequest
         return DB::transaction(function () {
             $sellingVisa = SellingVisa::create([
                 'user_id' => auth()->id(),
-                'nationality_id' => $this->nationality_id,
-                'destination_id' => $this->destination_id,
-                'visa_type_id' => $this->visa_type_id,
-                'employment_type_id' => $this->employment_type_id,
+                'nationality_id' => $this->nationality,
+                'destination_id' => $this->destination,
+                'visa_type_id' => $this->visa_type,
+                'employment_type_id' => $this->employment_type,
                 'provider_name' => $this->provider_name,
                 'contact_email' => $this->contact_email,
                 'required_qualifications' => $this->required_qualifications,
@@ -60,5 +60,19 @@ class SellingVisaStoreRequest extends FormRequest
 
             return $sellingVisa->refresh();
         });
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'nationality' => __('selling_visas.attributes.nationality'),
+            'destination' => __('selling_visas.attributes.destination'),
+            'visa_type' => __('selling_visas.attributes.visa_type'),
+            'employment_type' => __('selling_visas.attributes.employment_type'),
+            'provider_name' => __('selling_visas.attributes.provider_name'),
+            'contact_email' => __('selling_visas.attributes.contact_email'),
+            'required_qualifications' => __('selling_visas.attributes.required_qualifications'),
+            'message' => __('selling_visas.attributes.message'),
+        ];
     }
 }
