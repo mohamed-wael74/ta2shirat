@@ -11,6 +11,11 @@ use App\Models\SellingVisa;
 
 class SellingVisaController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(SellingVisa::class, 'selling_visa');
+    }
+
     public function index(SellingVisaFilter $filters)
     {
         $sellingVisas = SellingVisa::filter($filters)
