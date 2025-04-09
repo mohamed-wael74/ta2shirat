@@ -10,7 +10,9 @@ trait DealWithStatus
 {
     public function statuses(): MorphMany
     {
-        return $this->morphMany(Status::class, 'statusable');
+        return $this->morphMany(Status::class, 'statusable')
+            ->whereNotNull('active_date_at')
+            ->orderBy('active_date_at', 'desc');
     }
 
     public function currentStatus()
@@ -53,8 +55,7 @@ trait DealWithStatus
         $this->statuses()
             ->where('status_type_id', $statusTypeId)
             ->update([
-                'active_date_at' =>
-                    now()
+                'active_date_at' => now()
             ]);
     }
 }
