@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class AdminAuthenticationTest extends TestCase
