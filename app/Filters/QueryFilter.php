@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 abstract class QueryFilter
 {
     protected Builder $builder;
+    protected $availableBooleanValues = [
+        'yes' => 1,
+        'no' => 0,
+    ];
 
     public function __construct(protected Request $request)
     {

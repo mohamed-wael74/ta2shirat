@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Traits\DealWithStatus;
+use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SellingVisa extends Model
 {
-    use HasFactory, DealWithStatus;
+    use HasFactory, Filterable, DealWithStatus;
 
     protected $fillable = [
         'user_id',
@@ -53,5 +54,12 @@ class SellingVisa extends Model
     public function employmentType(): BelongsTo
     {
         return $this->belongsTo(EmploymentType::class);
+    }
+
+    ## Scopes
+
+    public function scopeDone($query, $state = true)
+    {
+        return $query->where('is_done', $state);
     }
 }
