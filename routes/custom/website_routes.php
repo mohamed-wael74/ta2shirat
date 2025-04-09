@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Website\CountryController;
 use App\Http\Controllers\Website\EmploymentTypeController;
-use App\Http\Controllers\Website\WebsiteAuthController;
+use App\Http\Controllers\Website\SellingVisaController;
 use App\Http\Controllers\Website\UserProfileController;
 use App\Http\Controllers\Website\VisaTypeController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +17,7 @@ Route::group([
     Route::get('profile', [UserProfileController::class, 'index'])->name('profile.index');
     Route::put('profile', [UserProfileController::class, 'update'])->name('profile.update');
     Route::delete('profile', [UserProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::apiResource('selling-visas', SellingVisaController::class)->except('destroy');
 });
 
 Route::group([

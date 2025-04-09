@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Models\Country;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -20,12 +19,12 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'country_id' => Country::all()->random()->id,
-            'first_name' => fake()->first_name(),
-            'last_name' => fake()->last_name(),
-            'username' => fake()->userName(),
-            'email' => fake()->unique()->safeEmail(),
-            'birthdate' => fake()->date(),
+            'country_id' => Country::factory(),
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'username' => $this->faker->userName(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'birthdate' => $this->faker->date(),
             'password' => Hash::make('Password@123'),
             'is_blocked' => false,
         ];
@@ -38,7 +37,7 @@ class UserFactory extends Factory
      */
     public function verified($state = true): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => $state ? now() : null,
             'phone_verified_at' => $state ? now() : null,
         ]);

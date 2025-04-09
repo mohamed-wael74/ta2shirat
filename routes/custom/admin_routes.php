@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\CountryController;
-use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\EmploymentTypeController;
 use App\Http\Controllers\Admin\PermissionGroupController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SellingVisaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Admin\VisaTypeController;
@@ -24,4 +24,5 @@ Route::group([
     Route::apiResource('visa-types', VisaTypeController::class);
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('users.roles', UserRoleController::class)->only(['update', 'destroy']);
+    Route::apiResource('selling-visas', SellingVisaController::class)->except(['store', 'destroy']);
 });

@@ -35,6 +35,16 @@ class Country extends Model
         return $this->hasMany(User::class);
     }
 
+    public function nationalitySellingVisas()
+    {
+        return $this->hasMany(SellingVisa::class, 'nationality_id');
+    }
+
+    public function destinationSellingVisas()
+    {
+        return $this->hasMany(SellingVisa::class, 'destination_id');
+    }
+
     // Scopes
 
     public function scopeAvailable($query, bool $is_available = true): Builder

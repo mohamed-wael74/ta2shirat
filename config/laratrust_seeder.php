@@ -10,6 +10,7 @@ return [
             'roles' => 'c,r,u,d',
             'permission_groups' => 'c,r,u,d',
             'role_user' => 'c,d',
+            'selling_visas' => 'r,u',
         ]
     ],
 
