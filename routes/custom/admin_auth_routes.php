@@ -10,13 +10,13 @@ Route::group([
         'auth:api'
     ]
 ], function () {
-    Route::post('signout', [AdminAuthController::class, 'signout']);
+    Route::post('signout', [AdminAuthController::class, 'signout'])->name('signout');
 });
 
 Route::group([
     'as' => 'admin.',
     'prefix' => 'admin-panel',
 ], function () {
-    Route::post('signin', [AdminAuthController::class, 'signin']);
+    Route::post('signin', [AdminAuthController::class, 'signin'])->name('signin');
 });
 

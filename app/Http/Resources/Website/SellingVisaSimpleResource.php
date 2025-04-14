@@ -12,7 +12,7 @@ class SellingVisaSimpleResource extends JsonResource
             'id' => $this->id,
             'provider_name' => $this->provider_name,
             'contact_email' => $this->contact_email,
-            'is_done' => $this->is_done,
+            'done' => $this->is_done,
             'created_at' => $this->created_at,
             'user' => new UserSimpleResource($this->user),
             'nationality' => new CountryResource($this->nationality),

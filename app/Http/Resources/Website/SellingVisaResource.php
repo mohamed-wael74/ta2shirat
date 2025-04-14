@@ -14,7 +14,7 @@ class SellingVisaResource extends JsonResource
             'contact_email' => $this->contact_email,
             'required_qualifications' => $this->required_qualifications,
             'message' => $this->message,
-            'is_done' => $this->is_done,
+            'done' => $this->is_done,
             'created_at' => $this->created_at,
             'user' => new UserSimpleResource($this->user),
             'nationality' => new CountryResource($this->nationality),

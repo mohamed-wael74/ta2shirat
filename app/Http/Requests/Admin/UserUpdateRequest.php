@@ -28,6 +28,8 @@ class UserUpdateRequest extends FormRequest
             abort(403, __('users.cant_block_superadmin'));
         }
 
-        return $this->user->update($this->validated());
+        return $this->user->update([
+            'is_blocked' => $this->blocked,
+        ]);
     }
 }
