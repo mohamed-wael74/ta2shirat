@@ -7,12 +7,13 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class RoleTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     protected function setUp(): void
     {
@@ -42,8 +43,8 @@ class RoleTest extends TestCase
         $permissions = Permission::factory(2)->create()->pluck('id')->toArray();
 
         $data = [
-            'name' => fake()->word(),
-            'description' => fake()->sentence(),
+            'name' => $this->faker->word,
+            'description' => $this->faker->sentence,
             'permissions' => $permissions
         ];
 
@@ -86,8 +87,8 @@ class RoleTest extends TestCase
 
         $data = [
             'locale' => app()->getLocale(),
-            'name' => fake()->word() . 'rol',
-            'description' => fake()->sentence(),
+            'name' => $this->faker->word,
+            'description' => $this->faker->sentence,
             'permissions' => $permissions
         ];
 
@@ -113,8 +114,8 @@ class RoleTest extends TestCase
 
         $data = [
             'locale' => app()->getLocale(),
-            'name' => fake()->word() . 'rol',
-            'description' => fake()->sentence(),
+            'name' => $this->faker->word,
+            'description' => $this->faker->sentence,
             'permissions' => $permissions
         ];
 

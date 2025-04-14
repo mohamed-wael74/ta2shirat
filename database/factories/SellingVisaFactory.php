@@ -28,7 +28,7 @@ class SellingVisaFactory extends Factory
             'employment_type_id' => EmploymentType::factory(),
             'provider_name' => $this->faker->company,
             'contact_email' => $this->faker->email,
-            'required_qualifications' => $this->faker->paragraph,
+            'required_qualifications' => $this->faker->sentence,
             'message' => $this->faker->paragraph,
             'is_done' => $this->faker->boolean,
         ];

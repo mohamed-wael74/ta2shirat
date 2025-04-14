@@ -7,12 +7,13 @@ use App\Models\Permission;
 use App\Models\User;
 use App\Models\VisaType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class VisaTypeTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     protected function setUp(): void
     {
@@ -49,7 +50,7 @@ class VisaTypeTest extends TestCase
     public function test_store()
     {
         $data = [
-            'name' => fake()->word() . ' vis'
+            'name' => $this->faker->word
         ];
 
         $response = $this->postJson(route('admin.visa-types.store'), $data);
@@ -89,7 +90,7 @@ class VisaTypeTest extends TestCase
 
         $data = [
             'locale' => app()->getLocale(),
-            'name' => fake()->word() . ' vis'
+            'name' => $this->faker->word
         ];
 
         $response = $this->putJson(route('admin.visa-types.update', $visaType->id), $data);

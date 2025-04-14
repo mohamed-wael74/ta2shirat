@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Website;
 
-use App\Models\User;
 use App\Models\VisaType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;

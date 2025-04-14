@@ -3,10 +3,8 @@
 namespace Tests\Feature\Website;
 
 use App\Models\Country;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
-use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class CountryTest extends TestCase
@@ -15,7 +13,7 @@ class CountryTest extends TestCase
 
     public function test_index()
     {
-        $country = Country::factory(10)->create();
+        Country::factory(10)->create();
 
         $response = $this->getJson(route('website.countries.index'));
 

@@ -3,9 +3,7 @@
 namespace Tests\Feature\Website;
 
 use App\Models\EmploymentType;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Route;
 use Tests\TestCase;
 

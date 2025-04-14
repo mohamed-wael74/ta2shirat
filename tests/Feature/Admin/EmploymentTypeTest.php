@@ -7,13 +7,13 @@ use App\Models\EmploymentType;
 use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
-use Faker\Factory as Faker;
 
 class EmploymentTypeTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     protected function setUp(): void
     {
@@ -50,7 +50,7 @@ class EmploymentTypeTest extends TestCase
     public function test_store()
     {
         $data = [
-            'name' => fake()->word() . ' emp'
+            'name' => $this->faker->word . ' emp'
         ];
 
         $response = $this->postJson(route('admin.employment-types.store'), $data);

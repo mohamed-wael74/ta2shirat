@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 class PermissionGroupTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     protected function setUp(): void
     {
@@ -51,7 +51,7 @@ class PermissionGroupTest extends TestCase
         $permissions = Permission::factory(2)->create()->pluck('id')->toArray();
 
         $data = [
-            'name' => fake()->word() . 'group',
+            'name' => $this->faker->word . 'group',
             'permissions' => $permissions
         ];
 
@@ -96,7 +96,7 @@ class PermissionGroupTest extends TestCase
 
         $data = [
             'locale' => app()->getLocale(),
-            'name' => fake()->word() . 'group',
+            'name' => $this->faker->word . 'group',
             'permissions' => $permissions
         ];
 

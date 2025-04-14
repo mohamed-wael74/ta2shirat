@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->morphs('statusable');            
             $table->unsignedBigInteger('status_type_id');
-            $table->dateTime('active_date_at_at')->nullable();
+            $table->dateTime('active_date_at')->nullable();
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ class Status extends Model
 
     protected $fillable = [
         'status_type_id',
-        'active_date_at_at',
+        'active_date_at',
     ];
 
     protected $casts = [
